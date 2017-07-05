@@ -2,8 +2,9 @@ var express = require('express');
 var path = require('path')
 var app = express();
 var port = (process.env.PORT || 3000);
+const Gitbook_setup = require('gitbook-setup');
 
-console.log(port +  is the port number);
+console.log(port + "is the port number");
 
 app.use('/', express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, 'views'));
@@ -18,3 +19,17 @@ app.get('/', (request, response) => {
       response.render ('index');
 });
 
+
+var bookConfig = {
+        "name": "NoNameBook",
+        "type": "book",
+        "templateName": "",
+        "deploys": new Array(),
+        "description":  "No Description about NoNameBook",
+        "authors": new Array(process.env.USER),
+        "private": "no",
+      }
+
+Gitbook_setup.create(bookConfig, function (err) {
+  if (err) console.log(err);
+});
