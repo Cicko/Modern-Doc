@@ -19,7 +19,7 @@ app.get('/', (request, response) => {
       response.render ('index');
 });
 
-app.get('create_book', (request, response) => {
+app.get('/create_book', (request, response) => {
   var bookConfig = {
           "name": request.body.name,
           "type": "book",
