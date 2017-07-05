@@ -21,15 +21,16 @@ app.get('/', (request, response) => {
 
 app.get('/create_book', (request, response) => {
   var bookConfig = {
-          "name": request.body.name,
+          "name": request.query.name,
           "type": "book",
           "templateName": "",
           "deploys": new Array(),
-          "description":  request.body.description,
+          "description":  request.query.description,
           "authors": new Array(process.env.USER),
           "private": "no",
         }
   Gitbook_setup.create(bookConfig, function (err) {
     if (err) console.log(err);
   });
+  
 })
