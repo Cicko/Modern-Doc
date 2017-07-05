@@ -36,7 +36,7 @@
   "homepage": "https://github.com/ULL-ESIT-GRADOII-TFG/Modern-Doc#readme",
   "dependencies": {
     "express": "^4.15.3",
-    "gitbook-setup": "^1.1.12",
+    "gitbook-setup": "^1.1.13",
     "path": "^0.12.7"
   },
   "engines": {

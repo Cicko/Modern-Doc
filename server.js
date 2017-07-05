@@ -19,17 +19,17 @@ app.get('/', (request, response) => {
       response.render ('index');
 });
 
-
-var bookConfig = {
-        "name": "NoNameBook",
-        "type": "book",
-        "templateName": "",
-        "deploys": new Array(),
-        "description":  "No Description about NoNameBook",
-        "authors": new Array(process.env.USER),
-        "private": "no",
-      }
-
-Gitbook_setup.create(bookConfig, function (err) {
-  if (err) console.log(err);
-});
+app.get('create_book', (request, response) => {
+  var bookConfig = {
+          "name": request.body.name,
+          "type": "book",
+          "templateName": "",
+          "deploys": new Array(),
+          "description":  request.body.description,
+          "authors": new Array(process.env.USER),
+          "private": "no",
+        }
+  Gitbook_setup.create(bookConfig, function (err) {
+    if (err) console.log(err);
+  });
+})
