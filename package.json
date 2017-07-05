@@ -1,0 +1,41 @@
+{
+  "name": "moderndoc",
+  "version": "1.0.0",
+  "description": "Web App that allows easy creation and deployment of documents",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ULL-ESIT-GRADOII-TFG/Modern-Doc.git"
+  },
+  "keywords": [
+    "gitbook",
+    "document",
+    "editor",
+    "publisher",
+    "deploy",
+    "deployment",
+    "internet",
+    "web",
+    "app",
+    "book",
+    "api",
+    "faq",
+    "heroku",
+    "gh-pages",
+    "server"
+  ],
+  "author": "Rudolf Cicko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ULL-ESIT-GRADOII-TFG/Modern-Doc/issues"
+  },
+  "homepage": "https://github.com/ULL-ESIT-GRADOII-TFG/Modern-Doc#readme",
+  "dependencies": {
+    "express": "^4.15.3",
+    "path": "^0.12.7"
+  }
+}
