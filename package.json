@@ -1,0 +1,14 @@
+{
+  "name": "ModernDoc",
+  "version": "0.0.1",
+  "main": "main.js",
+  "devDependencies": {
+    "electron": "^1.6.11"
+  },
+  "dependencies": {
+    "semantic-ui": "^2.2.10"
+  },
+  "scripts": {
+    "start": "node_modules/.bin/electron ."
+  }
+}

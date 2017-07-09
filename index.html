@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
+</head>
+<body>
+  <form class="ui form" style="margin: 5em 5em 5em 5em;">
+  <h2 class="ui dividing header">Create a new document</h4>
+  <div class="field">
+    <label>Title</label>
+      <div class="field">
+        <input type="text" name="title" placeholder="Sample book">
+      </div>
+  </div>
+  <div class="two fields" style="margin: 0em 0em 0em 0em;">
+    <div class="grouped fields">
+   <label for="fruit"> Select template:</label>
+   <div class="field">
+     <div class="ui radio checkbox">
+       <input type="radio" name="fruit" checked="" tabindex="0" class="hidden" id="type_book" onchange="typeChanged(this.id);">
+       <label>Book</label>
+     </div>
+   </div>
+   <div class="field">
+     <div class="ui radio checkbox">
+       <input type="radio" name="fruit" tabindex="0" class="hidden" id="type_api" onchange="typeChanged(this.id);">
+       <label>API</label>
+     </div>
+   </div>
+   <div class="field">
+     <div class="ui radio checkbox">
+       <input type="radio" name="fruit" tabindex="0" class="hidden" id="type_faq" onchange="typeChanged(this.id);">
+       <label>FAQ</label>
+     </div>
+   </div>
+   <div class="field">
+     <div class="ui radio checkbox">
+       <input type="radio" name="fruit" tabindex="0" class="hidden" id="type_other" onchange="typeChanged(this.id);" >
+       <label>Other</label>
+     </div>
+   </div>
+ </div>
+ <div class="field templateName">
+   <label>Template name <i class=" help icon link" data-content="It have to be npm package" data-variation="small"></i></label>
+     <div class="field">
+       <input type="text" name="title" placeholder="book">
+     </div>
+ </div>
+  </div>
+  <h4 class="ui dividing header">Deployments <i class=" help icon link" data-content="Select all platforms where do you want to deploy" data-variation="small"></i></h4>
+  <select class="ui fluid search dropdown" multiple="">
+    <option value="">Deployment</option>
+    <option value="Heroku">Heroku</option>
+    <option value="Ghpages">Github Pages</option>
+    <option value="Gitbook">Gitbook</option>
+    <option value="Server">Server</option>
+  </select>
+  <div class="ui sub header server">Server/s</div>
+  <div class="ui server fluid multiple search selection dropdown">
+    <input name="tags" type="hidden">
+    <i class="dropdown icon"></i>
+    <div class="default text">Insert IP addresses or domains (examples: 80.54.1.1, www.brocolito.io, chuchu.foo)</div>
+    <div class="menu">
+    </div>
+  </div>
+   <div class="ui divider"></div>
+  <div class="ui button" tabindex="0">Create book</div>
+</form>
+
+<link rel="stylesheet" type="text/css" href="semantic/dist/semantic.css">
+<script>
+  if (typeof module === 'object') {window.module = module; module = undefined;}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="semantic/dist/semantic.js"></script>
+<!-- Insert this line after script imports -->
+<script>
+  if (window.module) module = window.module;
+</script>
+<script>
+$('.templateName').transition('fade out')
+$('.server').transition('fade out')
+$('.ui.radio.checkbox').checkbox();
+$('select.dropdown').dropdown();
+
+var other_type_checked = false;
+var server_deployment = false;
+
+function typeChanged (element_id) {
+  if (element_id == "type_other") {
+    $('.templateName').transition('fade in')
+    other_type_checked = true;
+  }
+  else if (other_type_checked){
+    other_type_checked = false;
+    $('.templateName').transition('fade out')
+  }
+}
+
+
+$('.help.icon.link')
+  .popup()
+;
+
+
+$('.ui.fluid.search.dropdown')
+  .dropdown({
+    onChange: function(value, text, $selectedItem) {
+      if (server_deployment && !value.includes('Server')) {
+        server_deployment = false;
+        $('.server').transition('fade out')
+      }
+
+      if ($selectedItem == "Heroku") {
+
+      }
+      if ($selectedItem == "Server") {
+        server_deployment = true;
+        $('.server').transition('fade in')
+      }
+    }
+  });
+
+$('.ui.server.fluid.multiple.search.selection.dropdown').dropdown({
+    allowAdditions: true
+  })
+
+  const remote = require('electron').remote;
+  console.log(remote.app.getVersion());
+//$.get('/create_book', {body: "hola que tal niño"});
+
+</script>
+
+
+</body>
+
+
+</html>
