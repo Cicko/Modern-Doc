@@ -9,7 +9,7 @@
   <div class="field">
     <label>Title</label>
       <div class="field">
-        <input type="text" name="title" placeholder="Sample book">
+        <input type="text" id="title" name="title" placeholder="Sample book">
       </div>
   </div>
   <div class="two fields" style="margin: 0em 0em 0em 0em;">
@@ -17,25 +17,25 @@
    <label for="fruit"> Select template:</label>
    <div class="field">
      <div class="ui radio checkbox">
-       <input type="radio" name="fruit" checked="" tabindex="0" class="hidden" id="type_book" onchange="typeChanged(this.id);">
+       <input type="radio" name="fruit" checked="" tabindex="0" class="hidden" value="book" id="type_book" onchange="typeChanged(this.id);">
        <label>Book</label>
      </div>
    </div>
    <div class="field">
      <div class="ui radio checkbox">
-       <input type="radio" name="fruit" tabindex="0" class="hidden" id="type_api" onchange="typeChanged(this.id);">
+       <input type="radio" name="fruit" tabindex="0" class="hidden" value="api" id="api" onchange="typeChanged(this.id);">
        <label>API</label>
      </div>
    </div>
    <div class="field">
      <div class="ui radio checkbox">
-       <input type="radio" name="fruit" tabindex="0" class="hidden" id="type_faq" onchange="typeChanged(this.id);">
+       <input type="radio" name="fruit" tabindex="0" class="hidden" value="faq" id="faq" onchange="typeChanged(this.id);">
        <label>FAQ</label>
      </div>
    </div>
    <div class="field">
      <div class="ui radio checkbox">
-       <input type="radio" name="fruit" tabindex="0" class="hidden" id="type_other" onchange="typeChanged(this.id);" >
+       <input type="radio" name="fruit" tabindex="0" class="hidden" value="other" id="other" onchange="typeChanged(this.id);" >
        <label>Other</label>
      </div>
    </div>
@@ -43,7 +43,7 @@
  <div class="field templateName">
    <label>Template name <i class=" help icon link" data-content="It have to be npm package" data-variation="small"></i></label>
      <div class="field">
-       <input type="text" name="title" placeholder="book">
+       <input type="text" name="template" id="template_name" placeholder="book">
      </div>
  </div>
   </div>
@@ -51,12 +51,12 @@
   <select class="ui fluid search dropdown" multiple="">
     <option value="">Deployment</option>
     <option value="Heroku">Heroku</option>
-    <option value="Ghpages">Github Pages</option>
+    <option value="gh-pages">Github Pages</option>
     <option value="Gitbook">Gitbook</option>
     <option value="Server">Server</option>
   </select>
   <div class="ui sub header server">Server/s</div>
-  <div class="ui server fluid multiple search selection dropdown">
+  <div class="ui server fluid multiple search selection dropdown" id="deploys">
     <input name="tags" type="hidden">
     <i class="dropdown icon"></i>
     <div class="default text">Insert IP addresses or domains (examples: 80.54.1.1, www.brocolito.io, chuchu.foo)</div>
@@ -64,7 +64,8 @@
     </div>
   </div>
    <div class="ui divider"></div>
-  <div class="ui button" tabindex="0">Create book</div>
+  <div class="ui button" tabindex="0" onclick="createBook();">Create book</div>
+  <div class="ui button" tabindex="0" onclick="install();">Install</div>
 </form>
 
 <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.css">
@@ -78,16 +79,17 @@
   if (window.module) module = window.module;
 </script>
 <script>
-$('.templateName').transition('fade out')
-$('.server').transition('fade out')
-$('.ui.radio.checkbox').checkbox();
-$('select.dropdown').dropdown();
+const gitbook_setup = require('gitbook-setup');
 
 var other_type_checked = false;
+var actual_type_checked = "book";
 var server_deployment = false;
+var deployments;
+var servers;
 
 function typeChanged (element_id) {
-  if (element_id == "type_other") {
+  actual_type_checked = element_id;
+  if (element_id == "other") {
     $('.templateName').transition('fade in')
     other_type_checked = true;
   }
@@ -97,15 +99,19 @@ function typeChanged (element_id) {
   }
 }
 
+$('.templateName').transition('fade out')
+$('.server').transition('fade out')
+$('.ui.radio.checkbox').checkbox();
+$('select.dropdown').dropdown();
 
 $('.help.icon.link')
   .popup()
 ;
 
-
 $('.ui.fluid.search.dropdown')
   .dropdown({
     onChange: function(value, text, $selectedItem) {
+      deployments = value;
       if (server_deployment && !value.includes('Server')) {
         server_deployment = false;
         $('.server').transition('fade out')
@@ -121,13 +127,48 @@ $('.ui.fluid.search.dropdown')
     }
   });
 
-$('.ui.server.fluid.multiple.search.selection.dropdown').dropdown({
-    allowAdditions: true
-  })
+$('#deploys').dropdown({
+  allowAdditions: true,
+  onChange: function(value, text, $selectedItem) {
+    servers = value;
+  }
+});
 
-  const remote = require('electron').remote;
-  console.log(remote.app.getVersion());
-//$.get('/create_book', {body: "hola que tal niño"});
+
+function createBook() {
+  var title = $('#title')[0].value;
+  var type = actual_type_checked;
+  var template;
+  if (type == "other") {
+    template = $('#template_name')[0].value;
+  }
+  else {
+    template = type;
+  }
+  if (server_deployment) {
+    deployments = deployments.concat(servers.split(","));
+  }
+
+  gitbook_setup.create({
+    'name': title,
+    'template': template,
+    'deploys': deployments
+  }, function(err) {
+    if (err) console.log(err);
+  })
+}
+
+function install () {
+  gitbook_setup.install((err) => {
+    if (err) console.log(err);
+  })
+}
+
+
+
+
+
+
 
 </script>
 

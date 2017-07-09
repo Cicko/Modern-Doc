@@ -1,0 +1,8 @@
+{
+	"name": "rda",
+	"template": "book",
+	"deploys": [
+		"Heroku",
+		"gh-pages"
+	]
+}
