@@ -57,22 +57,13 @@
      </div>
  </div>
   </div>
-  <h4 class="ui dividing header">Deployments <i class=" help icon link" data-content="Select all platforms where do you want to deploy" data-variation="small"></i></h4>
+  <h4 class="ui dividing header">Deployments <i class=" help icon link" data-content="Select all platforms where do you want to deploy. You can add your own deployments that can be IP addresses (e.g 86.23.45.6)." data-variation="small"></i></h4>
   <select class="ui fluid search dropdown" multiple="">
     <option value="">Deployment</option>
     <option value="heroku">Heroku</option>
     <option value="gh-pages">Github Pages</option>
     <option value="gitbook">Gitbook</option>
-    <option value="server">Server</option>
   </select>
-  <div class="ui sub header server">Server/s</div>
-  <div class="ui server fluid multiple search selection dropdown" id="deploys">
-    <input name="tags" type="hidden">
-    <i class="dropdown icon"></i>
-    <div class="default text">Insert IP addresses or domains (examples: 80.54.1.1, www.brocolito.io, chuchu.foo)</div>
-    <div class="menu">
-    </div>
-  </div>
    <div class="ui divider"></div>
   <div class="ui button" tabindex="0" onclick="createBook();">Create book</div>
   <div class="ui button" tabindex="0" onclick="install();">Install</div>
@@ -111,7 +102,6 @@ function typeChanged (element_id) {
 }
 
 $('.templateName').transition('fade out')
-$('.server').transition('fade out')
 $('.ui.radio.checkbox').checkbox();
 $('select.dropdown').dropdown();
 
@@ -119,30 +109,17 @@ $('.help.icon.link')
   .popup()
 ;
 
-$('.ui.fluid.search.dropdown')
-  .dropdown({
-    onChange: function(value, text, $selectedItem) {
-      deployments = value;
-      if (server_deployment && !value.includes('server')) {
-        server_deployment = false;
-        $('.server').transition('fade out')
-      }
+$('.ui.fluid.search.dropdown').dropdown({
+  onChange: (value, text, $selectedItem) => {
+    deployments = value;
+    if ($selectedItem == "heroku") {
 
-      if ($selectedItem == "heroku") {
-
-      }
-      if ($selectedItem == "server") {
-        server_deployment = true;
-        $('.server').transition('fade in')
-      }
     }
-  });
-
-$('#deploys').dropdown({
-  allowAdditions: true,
-  onChange: function(value, text, $selectedItem) {
-    servers = value;
-  }
+  },
+  onAdd: (addedValue, addedText, $addedChoice) => {
+    
+  },
+  allowAdditions: true
 });
 
 
@@ -156,9 +133,6 @@ function createBook() {
   }
   else {
     template = type;
-  }
-  if (server_deployment) {
-    deployments = deployments.concat(servers.split(","));
   }
 
   var info = {
