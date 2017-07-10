@@ -9,7 +9,7 @@
     <div class="ui indeterminate text loader">Creating book</div>
   </div>
   <div class="ui dimmer install">
-    <div class="ui indeterminate text loader">Installing and preparing files</div>
+    <div class="ui big indeterminate text loader">Downloading needed files</div>
   </div>
   <p></p>
 
@@ -116,9 +116,6 @@ $('.ui.fluid.search.dropdown').dropdown({
 
     }
   },
-  onAdd: (addedValue, addedText, $addedChoice) => {
-    
-  },
   allowAdditions: true
 });
 
@@ -151,9 +148,15 @@ function createBook() {
 
 function install () {
   $('.dimmer.install.ui').addClass('active')
-  gitbook_setup.install((err) => {
-    if (err) console.log(err);
-    else {
+  gitbook_setup.install((err, message) => {
+    console.log("ERR: " + err);
+    console.log("MESSAGE: " + message);
+    if (message) $('.ui.indeterminate.text.loader').html(message);
+    else if (err)  {
+      console.log(err);
+      $('.dimmer.install.ui').removeClass('active')
+    }
+    else if (!message && !err){
       $('.dimmer.install.ui').removeClass('active')
     }
   })
