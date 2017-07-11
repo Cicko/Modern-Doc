@@ -4,7 +4,6 @@
   <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
 </head>
 <body>
-  <!--<div class="ui segment"> -->
   <div class="ui dimmer create">
     <div class="ui big indeterminate text loader">Creating book</div>
   </div>
@@ -27,7 +26,7 @@
    <label for="fruit"> Select template:</label>
    <div class="field">
      <div class="ui radio checkbox">
-       <input type="radio" name="fruit" checked="" tabindex="0" class="hidden" value="book" id="type_book" onchange="typeChanged(this.id);">
+       <input type="radio" name="fruit" checked="" tabindex="0" class="hidden" value="book" id="book" onchange="typeChanged(this.id);">
        <label>Book</label>
      </div>
    </div>
@@ -68,7 +67,13 @@
   <div class="ui button" tabindex="0" onclick="createBook();">Create book</div>
   <div class="ui button" tabindex="0" onclick="install();">Install</div>
 </form>
-<!--</div>-->
+<div class="ui success create message hidden" style="margin-left: 5em; margin-right: 5em; margin-top: -3em;">
+  <i class="close icon"></i>
+  <div class="header">
+    Your document was successfully created.
+  </div>
+  <p>Now you can install to configurate it</p>
+</div>
 
 <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.css">
 <script>
@@ -92,16 +97,18 @@ var servers;
 function typeChanged (element_id) {
   actual_type_checked = element_id;
   if (element_id == "other") {
-    $('.templateName').transition('fade in')
+    $('.templateName').removeClass('disabled')
+    $('.templateName').addClass('rotate')
+    $('.templateName').addClass('left')
     other_type_checked = true;
   }
   else if (other_type_checked){
     other_type_checked = false;
-    $('.templateName').transition('fade out')
+    $('.templateName').addClass('disabled')
   }
 }
 
-$('.templateName').transition('fade out')
+$('.templateName').addClass('disabled')
 $('.ui.radio.checkbox').checkbox();
 $('select.dropdown').dropdown();
 
@@ -112,8 +119,16 @@ $('.help.icon.link')
 $('.ui.fluid.search.dropdown').dropdown({
   onChange: (value, text, $selectedItem) => {
     deployments = value;
+    console.log("deployments are: " + deployments);
     if ($selectedItem == "heroku") {
 
+    }
+  },
+  onRemove: (removedValue, removedText, $removedChoice) => {
+    var index = deployments.indexOf(removedValue);
+    if (index > -1) {
+      deployments.splice(index, 1);
+      console.log(deployments);
     }
   },
   allowAdditions: true
@@ -142,9 +157,18 @@ function createBook() {
 
   gitbook_setup.create(info, function(err) {
     if (err) console.log(err);
-    else $('.dimmer.create.ui').removeClass('active')
+    else {
+      $('.dimmer.create.ui').removeClass('active')
+      $('.ui.success.create.message.hidden').removeClass('hidden');
+      setTimeout(() => {
+        $('.ui.success.create.message').transition('fade');
+      },5000);
+    }
   })
 }
+$('.message .close').on('click', function() {
+    $(this).closest('.message').transition('fade');
+});
 
 function install () {
   $('.dimmer.install.ui').addClass('active')
