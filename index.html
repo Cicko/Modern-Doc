@@ -3,77 +3,102 @@
 <head>
 </head>
 <body>
-  <div class="ui dimmer create">
-    <div class="ui big indeterminate text loader">Creating book</div>
+  <div class="ui top attached tabular menu">
+  <a class="item active" data-tab="creator">
+    Creator
+  </a>
+  <a class="item" data-tab="docs">
+    Docs
+  </a>
+  <div class="right menu">
+    <div class="item">
+      <div class="ui transparent icon input">
+        <input type="text" placeholder="Search users...">
+        <i class="search link icon"></i>
+      </div>
+    </div>
   </div>
-  <div class="ui dimmer install">
-    <div class="ui big indeterminate text loader">Downloading needed files</div>
+</div>
+<div class="ui bottom attached segment main content">
+  <div class="ui tab active" data-tab="creator">
+
+    <div class="ui dimmer create">
+      <div class="ui big indeterminate text loader">Creating book</div>
+    </div>
+    <div class="ui dimmer install">
+      <div class="ui big indeterminate text loader">Downloading needed files</div>
+    </div>
+    <p></p>
+
+    <form class="ui form" style="margin: 5em 5em 5em 5em;">
+    <h2 class="ui dividing header">Create a new document</h4>
+    <div class="field">
+      <label>Title</label>
+
+        <div class="field">
+          <input type="text" id="title" name="title" placeholder="Sample book">
+        </div>
+    </div>
+    <div class="two fields" style="margin: 0em 0em 0em 0em;">
+      <div class="grouped fields">
+     <label for="fruit"> Select template:</label>
+     <div class="field">
+       <div class="ui radio checkbox">
+         <input type="radio" name="fruit" checked="" tabindex="0" class="hidden" value="book" id="book" onchange="typeChanged(this.id);">
+         <label>Book</label>
+       </div>
+     </div>
+     <div class="field">
+       <div class="ui radio checkbox">
+         <input type="radio" name="fruit" tabindex="0" class="hidden" value="api" id="api" onchange="typeChanged(this.id);">
+         <label>API</label>
+       </div>
+     </div>
+     <div class="field">
+       <div class="ui radio checkbox">
+         <input type="radio" name="fruit" tabindex="0" class="hidden" value="faq" id="faq" onchange="typeChanged(this.id);">
+         <label>FAQ</label>
+       </div>
+     </div>
+     <div class="field">
+       <div class="ui radio checkbox">
+         <input type="radio" name="fruit" tabindex="0" class="hidden" value="other" id="other" onchange="typeChanged(this.id);" >
+         <label>Other</label>
+       </div>
+     </div>
+    </div>
+    <div class="field templateName">
+     <label>Template name <i class=" help icon link" data-content="It have to be npm package" data-variation="small"></i></label>
+       <div class="field">
+         <input type="text" name="template" id="template_name" placeholder="book">
+       </div>
+    </div>
+    </div>
+    <h4 class="ui dividing header">Deployments <i class=" help icon link" data-content="Select all platforms where do you want to deploy. You can add your own deployments that can be IP addresses (e.g 86.23.45.6)." data-variation="small"></i></h4>
+    <select class="ui fluid search dropdown" multiple="">
+      <option value="">Deployment</option>
+      <option value="heroku">Heroku</option>
+      <option value="gh-pages">Github Pages</option>
+      <option value="gitbook">Gitbook</option>
+    </select>
+     <div class="ui divider"></div>
+    <div class="ui button" tabindex="0" onclick="createBook();">Create book</div>
+    <div class="ui button" tabindex="0" onclick="install();">Install</div>
+    </form>
+    <div class="ui success create message hidden" style="margin-left: 5em; margin-right: 5em; margin-top: -3em;">
+    <i class="close icon"></i>
+    <div class="header">
+      Your document was successfully created.
+    </div>
+    <p>Now you can install to configurate it</p>
+    </div>
+  </div>
+  <div class="ui tab" data-tab="docs">
+    muy bien
   </div>
   <p></p>
-
-  <form class="ui form" style="margin: 5em 5em 5em 5em;">
-  <h2 class="ui dividing header">Create a new document</h4>
-  <div class="field">
-    <label>Title</label>
-
-      <div class="field">
-        <input type="text" id="title" name="title" placeholder="Sample book">
-      </div>
-  </div>
-  <div class="two fields" style="margin: 0em 0em 0em 0em;">
-    <div class="grouped fields">
-   <label for="fruit"> Select template:</label>
-   <div class="field">
-     <div class="ui radio checkbox">
-       <input type="radio" name="fruit" checked="" tabindex="0" class="hidden" value="book" id="book" onchange="typeChanged(this.id);">
-       <label>Book</label>
-     </div>
-   </div>
-   <div class="field">
-     <div class="ui radio checkbox">
-       <input type="radio" name="fruit" tabindex="0" class="hidden" value="api" id="api" onchange="typeChanged(this.id);">
-       <label>API</label>
-     </div>
-   </div>
-   <div class="field">
-     <div class="ui radio checkbox">
-       <input type="radio" name="fruit" tabindex="0" class="hidden" value="faq" id="faq" onchange="typeChanged(this.id);">
-       <label>FAQ</label>
-     </div>
-   </div>
-   <div class="field">
-     <div class="ui radio checkbox">
-       <input type="radio" name="fruit" tabindex="0" class="hidden" value="other" id="other" onchange="typeChanged(this.id);" >
-       <label>Other</label>
-     </div>
-   </div>
- </div>
- <div class="field templateName">
-   <label>Template name <i class=" help icon link" data-content="It have to be npm package" data-variation="small"></i></label>
-     <div class="field">
-       <input type="text" name="template" id="template_name" placeholder="book">
-     </div>
- </div>
-  </div>
-  <h4 class="ui dividing header">Deployments <i class=" help icon link" data-content="Select all platforms where do you want to deploy. You can add your own deployments that can be IP addresses (e.g 86.23.45.6)." data-variation="small"></i></h4>
-  <select class="ui fluid search dropdown" multiple="">
-    <option value="">Deployment</option>
-    <option value="heroku">Heroku</option>
-    <option value="gh-pages">Github Pages</option>
-    <option value="gitbook">Gitbook</option>
-  </select>
-   <div class="ui divider"></div>
-  <div class="ui button" tabindex="0" onclick="createBook();">Create book</div>
-  <div class="ui button" tabindex="0" onclick="install();">Install</div>
-</form>
-<div class="ui success create message hidden" style="margin-left: 5em; margin-right: 5em; margin-top: -3em;">
-  <i class="close icon"></i>
-  <div class="header">
-    Your document was successfully created.
-  </div>
-  <p>Now you can install to configurate it</p>
 </div>
-
+</body>
 <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.css">
 <script>
   if (typeof module === 'object') {window.module = module; module = undefined;}
@@ -89,12 +114,27 @@
 
 const gitbook_setup = require('gitbook-setup');
 const GitbookSetupManager = require('./lib/GitbookSetupManager.js')
+var fs = require('fs-extra');
 
 var other_type_checked = false;
 var actual_type_checked = "book";
 var server_deployment = false;
 var deployments;
 var servers;
+
+function openContent (e, content) {
+  var html;
+  if (content == "creator") {
+    html = fs.readFileSync('./creator.html','utf-8');
+    console.log(html);
+    $('.main.content').html(html);
+  }
+  else if (content == "docs") {
+    html = fs.readFileSync('./docs.html');
+    $('.main.content').html(html);
+  }
+
+}
 
 function typeChanged (element_id) {
   actual_type_checked = element_id;
@@ -108,6 +148,7 @@ function typeChanged (element_id) {
   }
 }
 
+$('.tabular.menu .item').tab();
 $('.templateName').addClass('disabled')
 $('.ui.radio.checkbox').checkbox();
 $('select.dropdown').dropdown();
@@ -157,7 +198,6 @@ function install () {
 }
 
 
-
 </script>
-</body>
+
 </html>
