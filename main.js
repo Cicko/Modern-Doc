@@ -6,6 +6,19 @@ const url = require('url')
 // be closed automatically when the JavaScript object is garbage collected.
 let win
 
+// mainWindow is your instance of BrowserWindow
+const electron = require('electron')
+const dialog = electron.dialog
+
+
+exports.selectDirectory = function () {
+  dialog.showOpenDialog(win, {
+    properties: ['openDirectory']
+  }, function(val) {
+    exports.dir_saving_path = val;
+  });
+}
+
 function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({width: 800, height: 800})
