@@ -1,0 +1,12 @@
+{
+	"name": "libroa",
+	"template": "book",
+	"deploys": [
+		"heroku",
+		"gh-pages"
+	],
+	"description": "No description about libroa.",
+	"authors": [
+		"rudy"
+	]
+}
