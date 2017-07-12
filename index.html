@@ -85,6 +85,8 @@
   if (window.module) module = window.module;
 </script>
 <script>
+
+
 const gitbook_setup = require('gitbook-setup');
 const GitbookSetupManager = require('./lib/GitbookSetupManager.js')
 
@@ -98,8 +100,6 @@ function typeChanged (element_id) {
   actual_type_checked = element_id;
   if (element_id == "other") {
     $('.templateName').removeClass('disabled')
-    $('.templateName').addClass('rotate')
-    $('.templateName').addClass('left')
     other_type_checked = true;
   }
   else if (other_type_checked){
@@ -119,7 +119,7 @@ $('.help.icon.link')
 $('.ui.fluid.search.dropdown').dropdown({
   onChange: (value, text, $selectedItem) => {
     deployments = value;
-    console.log("deployments are: " + deployments);
+  //  console.log("deployments are: " + deployments);
     if ($selectedItem == "heroku") {
 
     }
@@ -128,7 +128,7 @@ $('.ui.fluid.search.dropdown').dropdown({
     var index = deployments.indexOf(removedValue);
     if (index > -1) {
       deployments.splice(index, 1);
-      console.log(deployments);
+  //    console.log(deployments);
     }
   },
   allowAdditions: true
@@ -145,8 +145,6 @@ $('.message .close').on('click', function() {
 function install () {
   $('.dimmer.install.ui').addClass('active')
   gitbook_setup.install((err, message) => {
-    console.log("ERR: " + err);
-    console.log("MESSAGE: " + message);
     if (message) $('.ui.indeterminate.text.loader').html(message);
     else if (err)  {
       console.log(err);
@@ -157,6 +155,8 @@ function install () {
     }
   })
 }
+
+
 
 </script>
 </body>
