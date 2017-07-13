@@ -11,11 +11,11 @@ const electron = require('electron')
 const dialog = electron.dialog
 
 
-exports.selectDirectory = function () {
+exports.selectDirectory = function (callback) {
   dialog.showOpenDialog(win, {
     properties: ['openDirectory']
   }, function(val) {
-    exports.dir_saving_path = val;
+    callback(val[0]);
   });
 }
 
