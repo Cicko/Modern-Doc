@@ -1,8 +1,24 @@
-<!DOCTYPE HTML>
 <html>
 <head>
+  <script>
+  if (typeof module === 'object') {window.module = module; module = undefined;}
+  </script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+  if (window.module) module = window.module;
+  </script>
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script>
+    //console.log(module);
+    //window.$ = window.JQuery = module.exports.$ = module.exports.JQuery = require("jquery");
+
+  </script>
+  <script src="semantic/dist/semantic.js"></script>
+  <script src="src/js/CreatorController.js"></script>
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.css">
 </head>
-<body>
+<body ng-app="ModernDocApp">
   <div class="ui top attached tabular menu">
   <a class="item active" data-tab="creator">
     Creator
@@ -10,116 +26,117 @@
   <a class="item" data-tab="docs">
     Docs
   </a>
-  <div class="right menu">
-    <div class="item">
-      <div class="ui transparent icon input">
-        <input type="text" placeholder="Search users...">
-        <i class="search link icon"></i>
-      </div>
-    </div>
-  </div>
 </div>
 <div class="ui bottom attached segment main content">
-  <div class="ui tab active" data-tab="creator">
+  <div class="ui tab active" ng-controller="CreatorController" data-tab="creator">
+     <ng-include src="'src/html/creator.html'"></ng-include> 
+     <!-- <div class="ui dimmer create">
+       <div class="ui big indeterminate text loader">Creating book</div>
+     </div>
+     <div class="ui dimmer install">
+       <div class="ui big indeterminate text loader">Downloading needed files</div>
+     </div>
+     <p></p>
 
-    <div class="ui dimmer create">
-      <div class="ui big indeterminate text loader">Creating book</div>
-    </div>
-    <div class="ui dimmer install">
-      <div class="ui big indeterminate text loader">Downloading needed files</div>
-    </div>
-    <p></p>
-
-    <form class="ui form" style="margin: 5em 5em 5em 5em;">
-    <h2 class="ui dividing header">Create a new document</h4>
-      <div class="two fields">
-        <div class="field">
-          <label>Title</label>
-          <div class="field">
-            <input type="text" id="title" name="title" placeholder="Sample book">
-          </div>
+     <form class="ui form" style="margin: 5em 5em 5em 5em;">
+     <h2 class="ui dividing header">Create a new document</h4>
+       <div class="two fields">
+         <div class="field">
+           <label>Title</label>
+           <div class="field">
+             <input type="text" id="title" name="title" placeholder="Sample book">
+           </div>
+         </div>
+         <div class="field">
+           <label>Author\s <i class=" help icon link" data-content="You can add more than one author (separated with commas): John Lennon,Paul Mccartney." data-variation="small"></i></label>
+           <div class="field">
+             <input type="text" id="author" name="author" placeholder="Rudolf Cicko">
+           </div>
+         </div>
+       </div>
+     <div class="two fields" style="margin: 0em 0em 0em 0em;">
+       <div class="grouped fields">
+      <label for="fruit"> Select template:</label>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="fruit" checked="" tabindex="0" class="hidden" value="book" id="book" onchange="typeChanged(this.id);">
+          <label>Book</label>
         </div>
-        <div class="field">
-          <label>Author</label>
-          <div class="field">
-            <input type="text" id="author" name="author" placeholder="Rudolf Cicko">
-          </div>
-        </div>
-
       </div>
-    <div class="two fields" style="margin: 0em 0em 0em 0em;">
-      <div class="grouped fields">
-     <label for="fruit"> Select template:</label>
-     <div class="field">
-       <div class="ui radio checkbox">
-         <input type="radio" name="fruit" checked="" tabindex="0" class="hidden" value="book" id="book" onchange="typeChanged(this.id);">
-         <label>Book</label>
-       </div>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="fruit" tabindex="0" class="hidden" value="api" id="api" onchange="typeChanged(this.id);">
+          <label>API</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="fruit" tabindex="0" class="hidden" value="faq" id="faq" onchange="typeChanged(this.id);">
+          <label>FAQ</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="fruit" tabindex="0" class="hidden" value="other" id="other" onchange="typeChanged(this.id);" >
+          <label>Other</label>
+        </div>
+      </div>
+     </div>
+     <div class="field templateName">
+      <label>Template name <i class=" help icon link" data-content="It have to be npm package" data-variation="small"></i></label>
+        <div class="field">
+          <input type="text" name="template" id="template_name" placeholder="book">
+        </div>
+     </div>
      </div>
      <div class="field">
-       <div class="ui radio checkbox">
-         <input type="radio" name="fruit" tabindex="0" class="hidden" value="api" id="api" onchange="typeChanged(this.id);">
-         <label>API</label>
-       </div>
-     </div>
-     <div class="field">
-       <div class="ui radio checkbox">
-         <input type="radio" name="fruit" tabindex="0" class="hidden" value="faq" id="faq" onchange="typeChanged(this.id);">
-         <label>FAQ</label>
-       </div>
-     </div>
-     <div class="field">
-       <div class="ui radio checkbox">
-         <input type="radio" name="fruit" tabindex="0" class="hidden" value="other" id="other" onchange="typeChanged(this.id);" >
-         <label>Other</label>
-       </div>
-     </div>
-    </div>
-    <div class="field templateName">
-     <label>Template name <i class=" help icon link" data-content="It have to be npm package" data-variation="small"></i></label>
+       <label>Description</label>
        <div class="field">
-         <input type="text" name="template" id="template_name" placeholder="book">
+         <input type="text" id="description" name="description" placeholder="Wonderful description of your document.">
        </div>
-    </div>
-    </div>
-    <h4 class="ui dividing header">Deployments <i class=" help icon link" data-content="Select all platforms where do you want to deploy. You can add your own deployments that can be IP addresses (e.g 86.23.45.6)." data-variation="small"></i></h4>
-    <select class="ui fluid search dropdown" multiple="">
-      <option value="">Deployment</option>
-      <option value="heroku">Heroku</option>
-      <option value="gh-pages">Github Pages</option>
-      <option value="gitbook">Gitbook</option>
-    </select>
+     </div>
+     <h4 class="ui dividing header">Deployments <i class=" help icon link" data-content="Select all platforms where do you want to deploy. You can add your own deployments that can be IP addresses (e.g 86.23.45.6)." data-variation="small"></i></h4>
+     <select class="ui fluid search dropdown deploys" multiple="">
+       <option value="">Deployment</option>
+       <option value="heroku">Heroku</option>
+       <option value="gh-pages">Github Pages</option>
+       <option value="gitbook">Gitbook</option>
+     </select>
      <div class="ui divider"></div>
-    <div class="ui button" id="createButton" tabindex="0" onclick="createBook();">Create book</div>
-    <div class="ui button" tabindex="0" onclick="install();">Install</div>
-    </form>
-    <div class="ui success create message hidden" style="margin-left: 5em; margin-right: 5em; margin-top: -3em;">
-    <i class="close icon"></i>
-    <div class="header create message">
-      Your document was successfully created.
-    </div>
-    <p>Now you can install to configurate it</p>
-    </div>
-  </div>
+     <div class="two fields">
+       <div class="field">
+         <div class="ui checkbox">
+           <input type="checkbox" name="example" onchange="private(this.checked);">
+           <label>Private <i class=" help icon link" data-content="If the document is private you have to indicate the github organization which have access to it. Not applied on gh-pages or gitbook deployment" data-variation="small"></i></label>
+         </div>
+       </div>
+       <div class="field organization disabled">
+        <label>Github organization</label>
+          <div class="field">
+            <input type="text" name="organization" id="organization" placeholder="Organization">
+          </div>
+       </div>
+     </div>
+      <div class="ui divider"></div>
+     <div class="ui button" id="createButton" tabindex="0" onclick="createBook();">Create book</div>
+     <div class="ui button" tabindex="0" onclick="install();">Install</div>
+     </form>
+     <div class="ui success create message hidden" style="margin-left: 5em; margin-right: 5em; margin-top: -3em;">
+     <i class="close icon"></i>
+     <div class="header create message">
+       Your document was successfully created.
+     </div>
+     <p>Now you can install to configurate it</p>
+     </div>
+     </div>
+   -->
   <div class="ui tab" data-tab="docs">
-    muy bien
+      muy bien
   </div>
   <p></p>
 </div>
 </body>
-<link rel="stylesheet" type="text/css" href="semantic/dist/semantic.css">
 <script>
-  if (typeof module === 'object') {window.module = module; module = undefined;}
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="semantic/dist/semantic.js"></script>
-<!-- Insert this line after script imports -->
-<script>
-  if (window.module) module = window.module;
-</script>
-<script>
-
-
 const gitbook_setup = require('gitbook-setup');
 const GitbookSetupManager = require('./lib/GitbookSetupManager.js')
 var fs = require('fs-extra');
@@ -129,20 +146,36 @@ var actual_type_checked = "book";
 var server_deployment = false;
 var deployments;
 var servers;
+var is_private;
 
-function openContent (e, content) {
-  var html;
-  if (content == "creator") {
-    html = fs.readFileSync('./creator.html','utf-8');
-    console.log(html);
-    $('.main.content').html(html);
-  }
-  else if (content == "docs") {
-    html = fs.readFileSync('./docs.html');
-    $('.main.content').html(html);
-  }
+var load = function() {
+  $('.tabular.menu .item').tab();
+  $('.templateName').addClass('disabled')
+  $('.ui.radio.checkbox').checkbox();
+  $('select.dropdown').dropdown();
 
+  $('.help.icon.link')
+    .popup()
+  ;
+
+  $('.ui.fluid.search.dropdown.deploys').dropdown({
+    onChange: (value, text, $selectedItem) => {
+      deployments = value;
+    },
+    onRemove: (removedValue, removedText, $removedChoice) => {
+      var index = deployments.indexOf(removedValue);
+      if (index > -1)
+        deployments.splice(index, 1);
+    },
+    allowAdditions: true
+  });
+
+  $('.message .close').on('click', function() {
+      $(this).closest('.message').transition('fade');
+  });
 }
+
+load();
 
 function typeChanged (element_id) {
   actual_type_checked = element_id;
@@ -156,53 +189,18 @@ function typeChanged (element_id) {
   }
 }
 
-$('.tabular.menu .item').tab();
-$('.templateName').addClass('disabled')
-$('.ui.radio.checkbox').checkbox();
-$('select.dropdown').dropdown();
+function private (checked) {
+  is_private = checked;
+  if (checked)
+    $('.organization').removeClass('disabled')
+  else
+    $('.organization').addClass('disabled')
+}
 
-$('.help.icon.link')
-  .popup()
-;
 
-$('.ui.fluid.search.dropdown').dropdown({
-  onChange: (value, text, $selectedItem) => {
-    deployments = value;
-  //  console.log("deployments are: " + deployments);
-    if ($selectedItem == "heroku") {
-
-    }
-  },
-  onRemove: (removedValue, removedText, $removedChoice) => {
-    var index = deployments.indexOf(removedValue);
-    if (index > -1) {
-      deployments.splice(index, 1);
-  //    console.log(deployments);
-    }
-  },
-  allowAdditions: true
-});
 
 function createBook() {
   GitbookSetupManager.createDoc();
-}
-
-$('.message .close').on('click', function() {
-    $(this).closest('.message').transition('fade');
-});
-
-function install () {
-  $('.dimmer.install.ui').addClass('active')
-  gitbook_setup.install((err, message) => {
-    if (message) $('.ui.indeterminate.text.loader').html(message);
-    else if (err)  {
-      console.log(err);
-      $('.dimmer.install.ui').removeClass('active')
-    }
-    else if (!message && !err){
-      $('.dimmer.install.ui').removeClass('active')
-    }
-  })
 }
 
 
