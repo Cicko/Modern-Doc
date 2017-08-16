@@ -1,3 +1,4 @@
+<!DOCTYPE HTML>
 <html>
 <head>
   <script>
@@ -7,34 +8,25 @@
   <script>
   if (window.module) module = window.module;
   </script>
-  <script src="bower_components/angular/angular.min.js"></script>
-  <script>
-    //console.log(module);
-    //window.$ = window.JQuery = module.exports.$ = module.exports.JQuery = require("jquery");
-
-  </script>
 
   <!-- CSS -->
   <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.css">
 </head>
-<body ng-app="ModernDocApp">
-  <div class="ui top attached tabular menu">
-  <a class="item active" data-tab="creator">
-    Creator
-  </a>
-  <a class="item" data-tab="docs">
-    Docs
-  </a>
-</div>
-<div class="ui bottom attached segment main content">
-  <div class="ui tab active" ng-controller="CreatorController" data-tab="creator">
-     <ng-include src="'src/html/creator.html'"></ng-include>
-  <div class="ui tab" data-tab="docs">
-      muy bien
+
+<body>
+  <div id="app">
+
+  <script>
+  // install babel hooks in the renderer process
+  require('babel-register');
+  require('./app/app');
+  </script>
+
   </div>
-  <p></p>
-</div>
 </body>
+
+
+
 <script>
   const gitbook_setup = require('gitbook-setup');
   const GitbookSetupManager = require('./lib/GitbookSetupManager.js')
@@ -66,6 +58,30 @@
       $('.organization').addClass('disabled')
   }
 
+  $('.templateName').addClass('disabled');
+
+  // Semantic-ui configuration methods
+  $('.tabular.menu .item').tab();
+  $('.ui.radio.checkbox').checkbox();
+  $('select.dropdown').dropdown();
+  $('.help.icon.link').popup();
+
+  $('.ui.fluid.search.dropdown.deploys').dropdown({
+    onChange: (value, text, $selectedItem) => {
+      deployments = value;
+    },
+    onRemove: (removedValue, removedText, $removedChoice) => {
+      var index = deployments.indexOf(removedValue);
+      if (index > -1)
+        deployments.splice(index, 1);
+    },
+    allowAdditions: true
+  });
+
+  $('.message .close').on('click', function() {
+   $(this).closest('.message').transition('fade');
+  });
+
 
   function createBook() {
     GitbookSetupManager.createDoc();
@@ -74,6 +90,6 @@
 </script>
 
 <script src="semantic/dist/semantic.js"></script>
-<script src="src/js/CreatorController.js"></script>
+<!--<script src="src/js/CreatorController.js"></script>-->
 
 </html>
