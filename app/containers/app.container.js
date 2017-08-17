@@ -2,9 +2,9 @@
 import React, {Switch, Route} from 'react';
 
 import Creator from '../components/creator.component';
+import Docs from '../components/docs.component'
 import { Menu, Tab, MenuItem, Label } from 'semantic-ui-react'
 //import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-//import Docs from '../components/docs.component'
 
 const STATES = {
   c1: 'creator',
@@ -18,7 +18,7 @@ const panes = [
   },
   {
     menuItem: <MenuItem>Docs</MenuItem>,
-    render: () => <Tab.Pane>Oh suso</Tab.Pane>
+    render: () => <Tab.Pane><Docs/></Tab.Pane>
   }
 ]
 
