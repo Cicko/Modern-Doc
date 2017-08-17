@@ -1,31 +1,31 @@
 
-import React from 'react';
+import React, {Switch, Route} from 'react';
 
 import Creator from '../components/creator.component';
+import { Menu, Tab, MenuItem, Label } from 'semantic-ui-react'
+//import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+//import Docs from '../components/docs.component'
 
+const STATES = {
+  c1: 'creator',
+  c2: 'docs'
+};
+
+const panes = [
+  {
+    menuItem: <MenuItem>Creator</MenuItem>,
+    render: () => <Tab.Pane><Creator/></Tab.Pane>
+  },
+  {
+    menuItem: <MenuItem>Docs</MenuItem>,
+    render: () => <Tab.Pane>Oh suso</Tab.Pane>
+  }
+]
 
 export default class AppContainer extends React.Component {
   render() {
     return (
-      <div>
-        <div className="ui top attached tabular menu">
-          <a className="item active" data-tab="creator">
-            Creator
-          </a>
-          <a className="item" data-tab="docs">
-            Docs
-          </a>
-        </div>
-        <div className="ui bottom attached segment main content">
-          <div className="ui tab active" data-tab="creator">
-             <Creator/>
-          </div>
-          <div className="ui tab" data-tab="docs">
-              muy bien
-          </div>
-          <p></p>
-        </div>
-      </div>
+      <Tab panes={panes} />
     );
   }
 }
