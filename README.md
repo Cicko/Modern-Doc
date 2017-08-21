@@ -11,6 +11,14 @@ ModernDoc is a desktop app written in Javascript using the Electron library. It 
 | node | >= 8.x.x |
 
 
-### Screenshot
+### Screenshots
 
-![screenshot](src/img/screenshot.jpg)
+## Here you can see the __Creator__ tab
+
+![screenshot](src/img/moderndoc1.png)
+
+
+## After you create a document you can go to the Docs tab where you have a list of all existing docs in your system:
+
+
+![screenshot](src/img/moderndoc2.png)
