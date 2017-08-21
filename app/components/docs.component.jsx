@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { Grid, Menu, Image, List, Button } from 'semantic-ui-react'
-import { readDocs } from '../../lib/ModernDocManager'
+import { readDocs, removeDoc } from '../../lib/ModernDocManager'
 import { install } from '../../lib/GitbookSetupManager'
 
 const deployImages = {
@@ -18,6 +18,7 @@ export default class Docs extends React.Component {
   constructor() {
     super();
   }
+
 
   render() {
     return (
@@ -52,7 +53,8 @@ export default class Docs extends React.Component {
                   {doc.private == "yes" && <h4> Authorized organization: {doc.organization} </h4>}
                   {doc.private == "no" && <h4> This document is public.</h4>}
                   <h5>Located at {doc.path}</h5>
-                  <Button content='Install' onClick={install(doc.path)}/>
+                  <Button content='Install' onClick={() => { install(doc.path)}}/>
+                  <Button content='Delete' onClick={() => { removeDoc(doc.path); this.forceUpdate();}}/>
                 </Menu.Item>
               )}
             </Menu>

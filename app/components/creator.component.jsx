@@ -81,11 +81,10 @@ class Creator extends Component {
 
     console.log(this.state);
     createDoc(this.state, (path) => {
-      console.log("Path is: " + path);
       this.setState({path : path});
-      $('.ui.success.create.message.hidden').removeClass('hidden');
+      $('.ui.success.create.message').removeClass('hidden');
       setTimeout(() => {
-        $('.ui.success.create.message').transition('fade');
+        $('.ui.success.create.message').hide();
       },5000);
     });
   }

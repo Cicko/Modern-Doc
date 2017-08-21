@@ -15,7 +15,8 @@ exports.selectDirectory = function (callback) {
   dialog.showOpenDialog(win, {
     properties: ['openDirectory']
   }, function(val) {
-    callback(val[0]);
+    if (!val) callback(null);
+    else callback(val[0]);
   });
 }
 
