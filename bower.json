@@ -1,0 +1,28 @@
+{
+  "name": "ModernDoc",
+  "description": "Desktop App written using Electron and React.js",
+  "main": "main.js",
+  "authors": [
+    "Cicko <rudolfcicko2016@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "react.js",
+    "electron",
+    "node.js",
+    "javascript",
+    "json"
+  ],
+  "homepage": "https://github.com/Cicko/Modern-Doc",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.5",
+    "semantic": "^2.2.13"
+  }
+}

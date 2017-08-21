@@ -2,6 +2,10 @@
 
 ModernDoc is a desktop app written in Javascript using the Electron library. It uses semantic-ui that is a framework to create responsive interface design using HTML/CSS.
 
+![screenshot](src/img/nodejs-logo.png)
+![screenshot](src/img/react-logo.png)
+![screenshot](src/img/Electron-logo.png)
+
 ### Dependencies
 
 
