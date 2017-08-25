@@ -45,7 +45,7 @@ export default class Docs extends React.Component {
                           <h4>Deploys: </h4>
                         }
                         <List>
-                          {doc.deploys.map((deploy,i) => { return <List.Item key={i}><List.Content><List.Header as='d'>{deploy}</List.Header></List.Content></List.Item>})}
+                          {doc.deploys.map((deploy,i) => { return <List.Item key={i}><Button content={'Deploy to ' + deploy}  onClick={() => { removeDoc(doc.path); this.forceUpdate();}}/> </List.Item>})}
                         </List>
                       </Grid.Column>
                     </Grid.Row>
@@ -54,7 +54,9 @@ export default class Docs extends React.Component {
                   {doc.private == "no" && <h4> This document is public.</h4>}
                   <h5>Located at {doc.path}</h5>
                   <Button content='Install' onClick={() => { install(doc.path)}}/>
+                  <Button content='Repare' onClick={() => { removeDoc(doc.path); this.forceUpdate();}}/>
                   <Button content='Delete' onClick={() => { removeDoc(doc.path); this.forceUpdate();}}/>
+
                 </Menu.Item>
               )}
             </Menu>
