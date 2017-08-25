@@ -81,7 +81,9 @@ class Creator extends Component {
 
     console.log(this.state);
     createDoc(this.state, (path) => {
+      console.log("Path: " + path);
       this.setState({path : path});
+      console.log("Created");
       $('.ui.success.create.message').removeClass('hidden');
       setTimeout(() => {
         $('.ui.success.create.message').hide();
@@ -102,7 +104,7 @@ class Creator extends Component {
           <Form.Field control={Input} name="author" label='Author' placeholder='Jackie Chan' onChange={this.handleInputChange}/>
         </Form.Group>
         <Form.Group inline>
-          <label>Quantity</label>
+          <label>Doc type</label>
           <Form.Field control={Radio} label={types[0]} value={types[0]} checked={type === types[0]} onChange={this.handleChange} />
           <Form.Field control={Radio} label={types[1]} value={types[1]} checked={type === types[1]} onChange={this.handleChange} />
           <Form.Field control={Radio} label={types[2]} value={types[2]} checked={type === types[2]} onChange={this.handleChange} />

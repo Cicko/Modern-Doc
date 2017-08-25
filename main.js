@@ -32,6 +32,9 @@ function createWindow () {
     slashes: true
   }));
 
+  // Disable menu bar
+  win.setMenu(null);
+
 
   // Open the DevTools.
   win.webContents.openDevTools()
