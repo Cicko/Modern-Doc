@@ -45,7 +45,7 @@ export default class Docs extends React.Component {
                           <h4>Deploys: </h4>
                         }
                         <List>
-                          {doc.deploys.map((deploy,i) => { return <List.Item key={i}><Button content={'Deploy to ' + deploy}  onClick={() => { removeDoc(doc.path); this.forceUpdate();}}/> </List.Item>})}
+                        {doc.deploys.map((deploy,i) => { return <List.Item key={i}><Button content={'Deploy to ' + deploy}  onClick={() => { removeDoc(doc.path); this.forceUpdate();}}/> </List.Item>})}
                         </List>
                       </Grid.Column>
                     </Grid.Row>

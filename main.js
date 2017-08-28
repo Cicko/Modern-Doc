@@ -22,7 +22,7 @@ exports.selectDirectory = function (callback) {
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({width: 800, height: 900})
+  win = new BrowserWindow({width: 800, height: 900, icon:'src/img/logo.png'})
 
   // and load the index.html of the app.
 
